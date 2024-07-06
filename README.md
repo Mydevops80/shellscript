@@ -1,1 +1,3 @@
 # shellscript
+
+learning shell script
