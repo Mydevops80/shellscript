@@ -9,3 +9,4 @@ systemctl start nginx
 
 ls /etc/share/nginx/html
 ls /etc/nginx/nginx.conf
+cd /usr/share/nginx/html
