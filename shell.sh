@@ -8,3 +8,4 @@ systemctl enable nginx
 systemctl start nginx
 
 ls /etc/share/nginx/html
+ls /etc/nginx/nginx.conf
