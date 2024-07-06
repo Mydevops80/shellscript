@@ -1,3 +1,4 @@
 # shellscript
 
-learning shell script
+learning shell script<hr>
+first day of learning shell
