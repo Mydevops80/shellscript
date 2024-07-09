@@ -45,3 +45,5 @@ demo(){
   echo z value is $z
   echo z value is $((z))
 }
+demo
+demo
