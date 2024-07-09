@@ -1,4 +1,4 @@
-LOG_FILE=/tmp/dummy.log
+LOG_FILE=/tmp/roboshop.log
 rm -rf $LOG_FILE
 Nodejs(){
 
