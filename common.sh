@@ -28,7 +28,7 @@ Nodejs(){
 
   cd /app
   npm install
-  pinrt download nodejs dependencies
+  print download nodejs dependencies
 
   systemctl daemon-reload
   systemctl enable ${component}
