@@ -1,5 +1,6 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
+source variables.sh
 Nodejs(){
 
   cp ${component}.service /etc/systemd/system/${component}.service
@@ -38,4 +39,9 @@ print(){
   echo &>>LOG_FILE
   "###########$*###########" &>>LOG_FILE
   echo $*
+}
+demo(){
+  echo z value is ${z}
+  echo z value is $z
+  echo z value is $((z))
 }
