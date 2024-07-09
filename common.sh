@@ -1,7 +1,13 @@
+LOG_FILE=/tmp/dummy.log
+rm -rf $LOG_FILE
 Nodejs(){
+
   cp ${component}.service /etc/systemd/system/${component}.service
+  print echo copying service file
   dnf module disable nodejs -y
+  print echo installing nodejs 20
   dnf module enable nodejs:20 -y
+  print
   dnf install nodejs -y
   useradd roboshop
   rm -rf /app
@@ -14,4 +20,9 @@ Nodejs(){
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl restart ${component}
+}
+print(){
+  echo &>>LOG_FILE
+  echo"###########$*###########" &>>LOG_FILE
+  echo $*
 }
