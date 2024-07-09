@@ -41,9 +41,9 @@ print(){
   echo $*
 }
 demo(){
-  echo z value is ${z}
-  echo z value is $z
-  echo z value is $((z))
+  echo z value is ${z} &>>LOG_FILE
+  echo z value is $z &>>LOG_FILE
+  echo z value is $((z)) &>>LOG_FILE
 }
 demo
 demo
