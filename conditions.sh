@@ -15,7 +15,7 @@ stat(){
 }
 user(){
   if [ $? -ne 0 ] ; then
-    useradd pavani  &>>LOG_FILE
+   useradd pavani  &>>LOG_FILE
     fi
 }
 stat
