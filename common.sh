@@ -1,10 +1,25 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
+print(){
+  echo &>>$LOG_FILE
+  echo &>>$LOG_FILE
+  "#####################################$*###############################################" &>>$LOG_FILE
+  echo $*
+}
+stat() {
+  if [ $1 -eq 0 ]; then
+    echo -e "\e[32m Success \e[0m" &>>$LOG_FILE
+  else
+      echo -e "\e[31m Failure \e[0m" &>>$LOG_FILE
+      echo  -e "\e[31m refer log file  /tmp/roboshop" &>>$LOG_FILE
+  fi
+}
+
 Nodejs(){
 
   cp ${component}.service /etc/systemd/system/${component}.service
   print  copying service file
-  dnf module disable nodejs -y
+  dnf module disable nodejs -y &>>$LOG_FILE
   stat $?
 
   print  installing nodejs 20
@@ -42,19 +57,5 @@ Nodejs(){
   systemctl enable ${component} &>>$LOG_FILE
   systemctl restart ${component} &>>$LOG_FILE
   stat $?
-}
-print(){
-  echo &>>$LOG_FILE
-  echo &>>$LOG_FILE
-  "#####################################$*###############################################" &>>$LOG_FILE
-  echo $*
-}
-stat() {
-  if [ $1 -eq 0 ]; then
-    echo -e "\e[32m Success \e[0m" &>>$LOG_FILE
-  else
-      echo -e "\e[31m Failure \e[0m" &>>$LOG_FILE
-      echo  -e "\e[31m refer log file  /tmp/roboshop" &>>$LOG_FILE
-  fi
 }
 
