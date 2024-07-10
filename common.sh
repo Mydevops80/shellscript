@@ -63,6 +63,7 @@ Nodejs(){
   print download nodejs dependencies
   stat $?
 
+  print enabling ${component}
   systemctl daemon-reload &>>$LOG_FILE
   systemctl enable ${component} &>>$LOG_FILE
   systemctl restart ${component} &>>$LOG_FILE
