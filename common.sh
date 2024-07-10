@@ -30,7 +30,7 @@ APP_PREQ() {
   cd ${app_path} &>>$LOG_FILE
   stat $?
 
-  print extracting ${component} file
+  print extracting application content
   cd ${app_path}
   unzip /tmp/${component}.zip &>>$LOG_FILE
   stat $?
