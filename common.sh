@@ -1,6 +1,5 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
-source variables.sh
 Nodejs(){
 
   cp ${component}.service /etc/systemd/system/${component}.service
