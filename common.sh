@@ -37,13 +37,7 @@ Nodejs(){
 }
 print(){
   echo &>>LOG_FILE
-  "###########$*###########" &>>$LOG_FILE
+  "#####################################$*###############################################" &>>$LOG_FILE
   echo $*
 }
-demo(){
-  echo z value is ${z} &>>$LOG_FILE
-#  echo z value is $z &>>LOG_FILE
-#  echo z value is $((z)) &>>LOG_FILE
-}
-demo
 
