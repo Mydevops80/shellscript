@@ -16,6 +16,7 @@ stat() {
   fi
 }
 
+
 Nodejs(){
 
   cp ${component}.service /etc/systemd/system/${component}.service
@@ -29,7 +30,10 @@ Nodejs(){
 
   dnf install nodejs -y
   print adding user roboshop
-  useradd roboshop &>>$LOG_FILE
+  id roboshop &>>$LOG_FILE
+  if [ $? -ne 0 ] ; then
+    useradd roboshop &>>$LOG_FILE
+    fi
   stat $?
 
   rm -rf /app &>>$LOG_FILE
