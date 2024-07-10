@@ -8,10 +8,10 @@ print(){
 }
 stat() {
   if [ $1 -eq 0 ]; then
-    echo -e "\e[32m Success \e[0m" &>>$LOG_FILE
+    echo -e "\e[32m Success \e[0m"
   else
-      echo -e "\e[31m Failure \e[0m" &>>$LOG_FILE
-      echo  -e "\e[31m refer log file  /tmp/roboshop" &>>$LOG_FILE
+      echo -e "\e[31m Failure \e[0m"
+      echo  -e "\e[31m refer log file  /tmp/roboshop"
   fi
 }
 
