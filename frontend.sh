@@ -28,8 +28,5 @@ stat $?
 
 print starting nginx
 systemctl start nginx &>>$LOG_FILE
-#stat $?
-
-print restarting nginx
 systemctl restart nginx &>>$LOG_FILE
 stat $?
