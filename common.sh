@@ -53,7 +53,7 @@ stat(){
     echo -e "\e[32m Success \e[0m" &>>$LOG_FILE
   else
       echo -e "\e[31m Failure \e[0m" &>>$LOG_FILE
-      echo  -e"\e[31m refer log file \e[0m  /tmp/roboshop"
+      echo  -e "\e[31m refer log file  /tmp/roboshop" &>>$LOG_FILE
       exit
   fi
 }
