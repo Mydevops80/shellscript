@@ -21,7 +21,6 @@ stat $?
 
 APP_PREQ
 
- #vim /etc/nginx/nginx.
 print enabiling nginx
 systemctl enable nginx &>>$LOG_FILE
 stat $?
