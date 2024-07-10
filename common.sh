@@ -15,7 +15,26 @@ stat() {
       exit $1
   fi
 }
+APP_PREQ() {
+  #systemctl start nginx
+  print removing content from html
+  rm -rf ${app_path} &>>$LOG_FILE
+  stat $?
 
+  print creating app directory
+  ${app_path} &>>$LOG_FILE
+  stat $?
+
+  print downloading application content
+  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
+  cd ${app_path} &>>$LOG_FILE
+  stat $?
+
+  print unzipping ${component} file
+  unzip /tmp/${component}.zip &>>$LOG_FILE
+  stat $?
+
+}
 
 Nodejs(){
 
