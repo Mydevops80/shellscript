@@ -63,9 +63,6 @@ Nodejs(){
 
   APP_PREQ
 
-  cd /app &>>$LOG_FILE
-  npm install &>>$LOG_FILE
-  stat $?
   print download nodejs dependencies
   stat $?
 
