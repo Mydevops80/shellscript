@@ -20,7 +20,9 @@ cp nginx.conf /etc/nginx/nginx.conf
 stat $?
 
 APP_PREQ
+
  #vim /etc/nginx/nginx.
+print enabiling nginx
 systemctl enable nginx &>>$LOG_FILE
 systemctl restart nginx &>>$LOG_FILE
 stat $?
