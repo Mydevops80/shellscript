@@ -19,7 +19,7 @@ stat() {
 
 Nodejs(){
 
-  cp ${component}.service /etc/systemd/system/${component}.service
+  cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   print  copying service file
   dnf module disable nodejs -y &>>$LOG_FILE
   stat $?
