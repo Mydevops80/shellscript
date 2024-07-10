@@ -12,6 +12,7 @@ stat() {
   else
       echo -e "\e[31m Failure \e[0m"
       echo  -e "\e[31m refer log file  /tmp/roboshop"
+      exit
   fi
 }
 
