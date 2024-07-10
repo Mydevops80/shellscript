@@ -30,7 +30,8 @@ APP_PREQ() {
   cd ${app_path} &>>$LOG_FILE
   stat $?
 
-  print unzipping ${component} file
+  print extracting ${component} file
+  cd ${app_path}
   unzip /tmp/${component}.zip &>>$LOG_FILE
   stat $?
 
@@ -60,25 +61,11 @@ Nodejs(){
     fi
   stat $?
 
-  rm -rf /app &>>$LOG_FILE
-  print removing directory
-  stat $?
-
-  mkdir /app &>>$LOG_FILE
-  print creating directory
-  stat $?
-
-  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
-  print  downloading app content
-  stat $?
-
-  cd /app
-  unzip /tmp/${component}.zip &>>$LOG_FILE
-  print extracting app content
-  stat $?
+  APP_PREQ
 
   cd /app &>>$LOG_FILE
   npm install &>>$LOG_FILE
+  stat $?
   print download nodejs dependencies
   stat $?
 
