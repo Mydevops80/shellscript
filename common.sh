@@ -32,6 +32,7 @@ Nodejs(){
 
   cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   print  copying service file
+  stat $?
 
   print adding user roboshop
   id roboshop &>>$LOG_FILE
