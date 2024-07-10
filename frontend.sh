@@ -6,9 +6,11 @@ print disable nodejs default version
 dnf module disable nginx -y &>>$LOG_FILE
 stat $?
 
+print creating a conf file
 cp nginx.conf /etc/nginx/nginx.conf
 stat $?
-print
+
+print enabling nginx 1.24
 dnf module enable nginx:1.24 -y &>>$LOG_FILE
 stat $?
 
