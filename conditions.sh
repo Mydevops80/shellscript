@@ -1,15 +1,15 @@
 LOG_FILE=/tmp/temp.log
 rm -f LOG_FILE
 if [ $? -eq 0 ] ; then
-  echo -e "\e[32m Success \e[0m"
+  echo -e "\e[32m Success in IF \e[0m" &>>LOG_FILE
 else
-    echo -e "\e[31m Failure \e[0m"
+    echo -e "\e[31m Failure \e[0m" &>>LOG_FILE
 fi
 stat(){
   if [ $? -eq 0 ] ; then
-    echo -e "\e[32m Success \e[0m"
+    echo -e "\e[32m Success in stat \e[0m" &>>LOG_FILE
   else
-      echo -e "\e[31m Failure \e[0m"
+      echo -e "\e[31m Failure IN stat \e[0m" &>>LOG_FILE
       exit
   fi
 }
