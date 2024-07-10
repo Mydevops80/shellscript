@@ -45,8 +45,9 @@ Nodejs(){
 }
 print(){
   echo &>>$LOG_FILE
+  echo &>>$LOG_FILE
   "#####################################$*###############################################" &>>$LOG_FILE
-  echo $* &>>$LOG_FILE
+  echo $*
 }
 stat(){
   if [ $1 -eq 0 ]; then
