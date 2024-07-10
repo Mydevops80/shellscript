@@ -19,8 +19,7 @@ stat() {
 
 Nodejs(){
 
-  cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
-  print  copying service file
+
   dnf module disable nodejs -y &>>$LOG_FILE
   stat $?
 
@@ -28,7 +27,12 @@ Nodejs(){
   dnf module enable nodejs:20 -y &>>$LOG_FILE
   stat $?
 
-  dnf install nodejs -y
+  dnf install nodejs -y &>>$LOG_FILE
+
+
+  cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
+  print  copying service file
+
   print adding user roboshop
   id roboshop &>>$LOG_FILE
   if [ $? -ne 0 ] ; then
