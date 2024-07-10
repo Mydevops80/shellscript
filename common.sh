@@ -2,7 +2,7 @@ LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
 print(){
   echo &>>$LOG_FILE
-  echo &>>$LOG_FILE
+#  echo &>>$LOG_FILE
   "#####################################$*###############################################" &>>$LOG_FILE
   echo $*
 }
