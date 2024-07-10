@@ -49,7 +49,7 @@ print(){
   echo $*
 }
 stat(){
-  if [ $1 -eq 0 ] ; then
+  if [ $? -eq 0 ] ; then
     echo -e "\e[32m Success in stat \e[0m" &>>$LOG_FILE
   else
       echo -e "\e[31m Failure IN stat \e[0m" &>>$LOG_FILE
