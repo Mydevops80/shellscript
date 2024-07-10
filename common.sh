@@ -11,7 +11,7 @@ stat() {
     echo -e "\e[32m Success \e[0m"
   else
       echo -e "\e[31m Failure \e[0m"
-      echo  " refer the log file for more information : /tmp/roboshop"
+      echo  " refer the log file for more information : /tmp/roboshop.log"
       exit $1
   fi
 }
