@@ -22,7 +22,7 @@ APP_PREQ() {
   stat $?
 
   print creating app directory
-  ${app_path} &>>$LOG_FILE
+  mkdir ${app_path} &>>$LOG_FILE
   stat $?
 
   print downloading application content
