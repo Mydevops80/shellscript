@@ -1,5 +1,6 @@
 source common.sh
 component=dispatch
+app_path=/app
 
 APP_PREQ
 print installing golang
