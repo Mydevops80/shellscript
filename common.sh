@@ -119,9 +119,8 @@ JAVA_SERVICE() {
   stat $?
 
 }
-Nodejs(){
 
-
+NODEJS() {
   dnf module disable nodejs -y &>>$LOG_FILE
   stat $?
 
