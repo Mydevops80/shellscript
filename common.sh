@@ -100,7 +100,10 @@ JAVA_SERVICE() {
   mvn clean package &>>$LOG_FILE
   mv target/${component}-1.0.jar ${component}.jar &>>$LOG_FILE
   stat $?
+
+  print schemasetup
   SCHEMA_SETUP
+  stat $?
 
   print starting ${component}
   systemctl daemon-reload &>>$LOG_FILE
