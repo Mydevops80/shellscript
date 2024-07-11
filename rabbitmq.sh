@@ -3,21 +3,21 @@ component=rabbitmq-server
 
   print copying repo file
   cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
-  stat $?
+  STAT $?
 
   print installing Rabitmq
   dnf install ${component} -y &>>$LOG_FILE
-  stat $?
+  STAT $?
 
   print enablling Rabitmq
   systemctl enable ${component} &>>$LOG_FILE
-  stat $?
+  STAT $?
 
   print starting Rabitmq
   systemctl start ${component} &>>$LOG_FILE
-  stat $?
+  STAT $?
 
 print adding user to rabbitmq
 rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
-stat $?
+STAT $?

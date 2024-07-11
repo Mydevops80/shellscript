@@ -7,7 +7,7 @@ APP_PREQ
 
 print installing Payment
 dnf install python3 gcc python3-devel -y &>>$LOG_FILE
-stat $?
+STAT $?
 
 SYSTEMD_SETUP
-stat $?
+STAT $?

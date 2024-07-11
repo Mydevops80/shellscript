@@ -5,7 +5,7 @@ app_path=/app
 APP_PREQ
 print installing golang
 dnf install golang -y &>>$LOG_FILE
-stat $?
+STAT $?
 
 print running go build
 go mod init dispatch &>>$LOG_FILE
