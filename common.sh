@@ -56,6 +56,7 @@ JAVA_SERVICE() {
   APP_PREQ
   mvn clean package &>>$LOG_FILE
   mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
+  stat $?
 
 
   print installing mysql
@@ -65,10 +66,13 @@ JAVA_SERVICE() {
   mysql -h localhost -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
   mysql -h localhost -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
   mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
+  stat $?
 
+  print starting shipping
   systemctl daemon-reload &>>$LOG_FILE
   systemctl enable shipping &>>$LOG_FILE
   systemctl start shipping &>>$LOG_FILE
+  stat $?
 
 }
 Nodejs(){
