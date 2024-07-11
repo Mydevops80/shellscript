@@ -1,7 +1,6 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
-code_dir=pwd
-
+code_dir=$(pwd)
 print(){
   echo &>>$LOG_FILE
 #  echo &>>$LOG_FILE
@@ -160,10 +159,6 @@ Nodejs(){
 }
 
 SYSTEMD_SETUP() {
-  print opening app path
-  cd ${app_path}
-  stat $?
-
   print  copying service file
   cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   stat $?
