@@ -13,13 +13,13 @@ print installing redis
 dnf install redis -y &>>$LOG_FILE
 stat $?
 
-print changing the ip 127 to 0 redis.conf file
-sed -i '/^bind/ s/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>>$LOG_FILE
+print changing the ip 127 to 0 and changing the ip protected-mode yes to no redis.conf file
+sed -i -e '/^bind/ s/127.0.0.1/0.0.0.0/'  -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>>$LOG_FILE
 stat $?
 
-print changing the ip protected-mode yes to no  redis.conf file
-sed -i '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>>$LOG_FILE
-stat $?
+#print changing the ip protected-mode yes to no  redis.conf file
+#sed -i '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>>$LOG_FILE
+#stat $?
 
 
 print starting redis
