@@ -2,7 +2,7 @@ source common.sh
 component=mongo.
 
 print  copy mongodb repo file
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp mongodb.repo /etc/yum.repos.d/mongo.repo
 stat $?
 
 print installing mongodb
