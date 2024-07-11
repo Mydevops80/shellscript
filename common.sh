@@ -48,7 +48,9 @@ JAVA_SERVICE() {
   stat $?
 
   print  adding user
+  if [ id-e -ne  0 ] ; then
   useradd roboshop  &>>$LOG_FILE
+  fi
   stat $?
 
   APP_PREQ
