@@ -31,7 +31,7 @@ SCHEMA_SETUP(){
     mongosh --host localhost </app/db/master-data.js
     stat $?
     fi
-    if [ "$schema_setup" == "mysql" ]; then
+  if [ "$schema_setup" == "mysql" ]; then
 
       print install MySQL client
       dnf install mysql -y &>>$LOG_FILE
