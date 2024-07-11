@@ -142,7 +142,7 @@ Nodejs(){
 
 SYSTEMD_SETUP() {
   print  copying service file
-  cp ${code_dir/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
+  cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   stat $?
 
   print enabling ${component}
@@ -150,5 +150,4 @@ SYSTEMD_SETUP() {
   systemctl enable ${component} &>>$LOG_FILE
   systemctl restart ${component} &>>$LOG_FILE
   stat $?
-}
 }
