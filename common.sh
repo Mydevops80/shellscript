@@ -29,7 +29,7 @@ SCHEMA_SETUP(){
 
     mongosh --host mongod.heydevops.online </app/db/master-data.js
     stat $?
-    fi
+  fi
   if [ "$schema_setup" == "mysql" ]; then
 
       print install MySQL client
@@ -54,7 +54,7 @@ SCHEMA_SETUP(){
       print load user data
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
       stat $?
-      fi
+    fi
 
 }
 APP_PREQ() {
