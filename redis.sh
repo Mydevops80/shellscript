@@ -20,11 +20,7 @@ stat $?
 #print changing the ip protected-mode yes to no  redis.conf file
 #sed -i '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>>$LOG_FILE
 #stat $?
-
-
 print starting redis
-
 systemctl enable redis &>>$LOG_FILE
-
 systemctl start redis &>>$LOG_FILE
 stat $?
