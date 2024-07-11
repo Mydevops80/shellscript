@@ -84,7 +84,7 @@ APP_PREQ() {
     fi
   stat $?
 
-  print removing content from html
+  print removing  application content
   rm -rf ${app_path} &>>$LOG_FILE
   stat $?
 
