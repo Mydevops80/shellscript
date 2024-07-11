@@ -24,7 +24,7 @@ APP_PREQ() {
   id roboshop &>>$LOG_FILE
   if [ $? -ne 0 ] ; then
     useradd roboshop &>>$LOG_FILE
-    fi
+  fi
   STAT $?
 
   print removing  application content
@@ -73,12 +73,13 @@ NODEJS() {
   id roboshop &>>$LOG_FILE
   if [ $? -ne 0 ] ; then
     useradd roboshop &>>$LOG_FILE
-    fi
+  fi
   STAT $?
 
   APP_PREQ
-  npm install &>>$LOG_FILE
+
   print download nodejs dependencies
+  npm install &>>$LOG_FILE
   STAT $?
 
   SCHEMA_SETUP
