@@ -77,7 +77,7 @@ NODEJS() {
   STAT $?
 
   APP_PREQ
-
+  npm install &>>$LOG_FILE
   print download nodejs dependencies
   STAT $?
 
