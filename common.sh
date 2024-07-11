@@ -27,7 +27,7 @@ SCHEMA_SETUP(){
     dnf install mongodb-mongosh -y &>>$LOG_FILE
     stat $?
 
-    mongosh --host localhost </app/db/master-data.js
+    mongosh --host mongod.heydevops.online </app/db/master-data.js
     stat $?
     fi
   if [ "$schema_setup" == "mysql" ]; then
@@ -36,7 +36,7 @@ SCHEMA_SETUP(){
       dnf install mysql -y &>>$LOG_FILE
       stat $?
 
-      mongosh --host localhost </app/db/master-data.js
+      mongosh --host mongod.heydevops.online </app/db/master-data.js
       stat $?
 
       print installing mysql
@@ -44,15 +44,15 @@ SCHEMA_SETUP(){
       stat $?
 
       print loadschema
-      mysql -h localhost -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
+      mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
       stat $?
 
       print load master data
-      mysql -h localhost -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
+      mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
       stat $?
 
       print load user data
-      mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
+      mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
       stat $?
       fi
 if [ "$schema_setup" == "rabbitmq" ]; then
