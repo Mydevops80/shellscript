@@ -56,6 +56,24 @@ SCHEMA_SETUP(){
       mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
       stat $?
       fi
+if [ "$schema_setup" == "rabbitmq" ]; then
+  print copying repo file
+  cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
+  stat $?
+
+  print installing Rabitmq
+  dnf install ${component} -y &>>$LOG_FILE
+  stat $?
+
+  print enablling Rabitmq
+  systemctl enable ${component} &>>$LOG_FILE
+  stat $?
+
+  print starting Rabitmq
+  systemctl start ${component} &>>$LOG_FILE
+  stat $?
+fi
+}
 APP_PREQ() {
   #systemctl start nginx
 
@@ -85,6 +103,7 @@ APP_PREQ() {
   stat $?
 
 }
+
 JAVA_SERVICE() {
 
   print copying service file
@@ -151,3 +170,4 @@ SYSTEMD_SETUP() {
   systemctl restart ${component} &>>$LOG_FILE
   stat $?
 }
+
