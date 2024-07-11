@@ -101,6 +101,10 @@ APP_PREQ() {
   unzip /tmp/${component}.zip &>>$LOG_FILE
   stat $?
 
+  print opening app path
+  cd ${app_path}
+  stat $?
+
 }
 
 JAVA_SERVICE() {
