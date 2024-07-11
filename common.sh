@@ -87,10 +87,6 @@ APP_PREQ() {
   unzip /tmp/${component}.zip &>>$LOG_FILE
   stat $?
 
-  print opening app path
-  cd ${app_path}
-  stat $?
-
 }
 
 JAVA_SERVICE() {
@@ -148,9 +144,6 @@ NODEJS() {
 }
 
 SYSTEMD_SETUP() {
-  print opening app path
-  cd ${app_path}
-  stat $?
 
   print  copying service file
   cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
