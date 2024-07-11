@@ -17,6 +17,46 @@ stat() {
       exit $1
   fi
 }
+SCHEMA_SETUP(){
+  if [ "$schema_setup" == "mongo" ]; then
+
+    print  copy mongodb repo file
+    cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+    stat $?
+
+    print install mongodb client
+    dnf install mongodb-mongosh -y &>>$LOG_FILE
+    stat $?
+
+    mongosh --host localhost </app/db/master-data.js
+    stat $?
+    fi
+    if [ "$schema_setup" == "mysql" ]; then
+
+      print install MySQL client
+      dnf install mysql -y &>>$LOG_FILE
+      stat $?
+
+      mongosh --host localhost </app/db/master-data.js
+      stat $?
+
+      print installing mysql
+      dnf install mysql -y &>>$LOG_FILE
+      stat $?
+
+      print loadschema
+      mysql -h localhost -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
+      stat $?
+
+      print load master data
+      mysql -h localhost -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
+      stat $?
+
+      print load user data
+      mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
+      stat $?
+      fi
+}
 APP_PREQ() {
   #systemctl start nginx
 
@@ -60,16 +100,7 @@ JAVA_SERVICE() {
   mvn clean package &>>$LOG_FILE
   mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
   stat $?
-
-
-  print installing mysql
-  dnf install mysql -y &>>$LOG_FILE
-  stat $?
-  print giving mysql password
-  mysql -h localhost -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
-  mysql -h localhost -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
-  mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
-  stat $?
+  SCHEMA_SETUP
 
   print starting shipping
   systemctl daemon-reload &>>$LOG_FILE

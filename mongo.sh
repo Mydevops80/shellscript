@@ -1,9 +1,6 @@
 source common.sh
 component=mongo
 
-print  copy mongodb repo file
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
-stat $?
 
 print installing mongodb
 dnf install mongodb-org -y &>>$LOG_FILE
