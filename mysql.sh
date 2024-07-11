@@ -1,6 +1,6 @@
 source common.sh
 component=mongo
-
+SCHEMA_SETUP=mysql
 print install mysql server
 dnf install mysql-server -y &>>$LOG_FILE
 stat $?
