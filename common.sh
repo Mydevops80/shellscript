@@ -111,6 +111,3 @@ SYSTEMD_SETUP() {
   systemctl restart ${component} &>>$LOG_FILE
   stat $?
 }
-
-
-
