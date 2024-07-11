@@ -159,6 +159,10 @@ Nodejs(){
 }
 
 SYSTEMD_SETUP() {
+  print opening app path
+  cd ${app_path}
+  stat $?
+
   print  copying service file
   cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   stat $?
