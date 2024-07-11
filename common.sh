@@ -56,7 +56,6 @@ SCHEMA_SETUP(){
       mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
       stat $?
       fi
-}
 APP_PREQ() {
   #systemctl start nginx
 
@@ -142,8 +141,8 @@ Nodejs(){
 }
 
 SYSTEMD_SETUP() {
-  cp ${code_dir/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   print  copying service file
+  cp ${code_dir/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   stat $?
 
   print enabling ${component}
