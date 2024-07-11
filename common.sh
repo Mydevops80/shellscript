@@ -25,15 +25,15 @@ APP_PREQ() {
   if [ $? -ne 0 ] ; then
     useradd roboshop &>>$LOG_FILE
     fi
-  stat $?
+  STAT $?
 
   print removing  application content
   rm -rf ${app_path} &>>$LOG_FILE
-  stat $?
+  STAT $?
 
   print creating app directory
   mkdir ${app_path} &>>$LOG_FILE
-  stat $?
+  STAT $?
 
   print downloading application content
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
@@ -119,40 +119,40 @@ SCHEMA_SETUP(){
 
     print  copy mongodb repo file
     cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
-    stat $?
+    STAT $?
 
     print install mongodb client
     dnf install mongodb-mongosh -y &>>$LOG_FILE
-    stat $?
+    STAT $?
 
     mongosh --host mongod.heydevops.online </app/db/master-data.js
-    stat $?
+    STAT $?
   fi
 
   if [ "$schema_setup" == "mysql" ]; then
 
       print install MySQL client
       dnf install mysql -y &>>$LOG_FILE
-      stat $?
+      STAT $?
 
       mongosh --host mongod.heydevops.online </app/db/master-data.js
-      stat $?
+      STAT $?
 
       print installing mysql
       dnf install mysql -y &>>$LOG_FILE
-      stat $?
+      STAT $?
 
       print loadschema
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
-      stat $?
+      STAT $?
 
       print load master data
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
-      stat $?
+      STAT $?
 
       print load user data
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
-      stat $?
+      STAT $?
 
   fi
 
