@@ -48,10 +48,11 @@ JAVA_SERVICE() {
   dnf install maven -y  &>>$LOG_FILE
   stat $?
 
-  print  adding user
-  if [ $? -ne  0 ] ; then
-  useradd roboshop  &>>$LOG_FILE
-  fi
+  print adding user roboshop
+  id roboshop &>>$LOG_FILE
+  if [ $? -ne 0 ] ; then
+    useradd roboshop &>>$LOG_FILE
+    fi
   stat $?
 
   APP_PREQ
