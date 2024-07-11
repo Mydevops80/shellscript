@@ -17,7 +17,7 @@ stat() {
   fi
 }
 SCHEMA_SETUP(){
-  if [ "$schema_setup" == "mongo" ] ; then
+  if [ "$schema_setup" == "mongo" ]; then
 
     print  copy mongodb repo file
     cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
