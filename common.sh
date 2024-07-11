@@ -37,18 +37,6 @@ APP_PREQ() {
   stat $?
 
 }
-
-SYSTEMD_SETUP() {
-  cp ${code_dir/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
-  print  copying service file
-  stat $?
-
-  print enabling ${component}
-  systemctl daemon-reload &>>$LOG_FILE
-  systemctl enable ${component} &>>$LOG_FILE
-  systemctl restart ${component} &>>$LOG_FILE
-  stat $?
-}
 JAVA_SERVICE() {
 
   print copying service file
@@ -67,8 +55,11 @@ JAVA_SERVICE() {
   mvn clean package &>>$LOG_FILE
   mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 
-  dnf install mysql -y &>>$LOG_FILE
 
+  print installing mysql
+  dnf install mysql -y &>>$LOG_FILE
+  stat $?
+  print giving mysql password
   mysql -h localhost -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
   mysql -h localhost -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
   mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
@@ -76,6 +67,7 @@ JAVA_SERVICE() {
   systemctl daemon-reload &>>$LOG_FILE
   systemctl enable shipping &>>$LOG_FILE
   systemctl start shipping &>>$LOG_FILE
+
 }
 Nodejs(){
 
@@ -104,6 +96,19 @@ Nodejs(){
   stat $?
   SYSTEMD_SETUP
 
-
 }
+
+SYSTEMD_SETUP() {
+  cp ${code_dir/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
+  print  copying service file
+  stat $?
+
+  print enabling ${component}
+  systemctl daemon-reload &>>$LOG_FILE
+  systemctl enable ${component} &>>$LOG_FILE
+  systemctl restart ${component} &>>$LOG_FILE
+  stat $?
+}
+
+
 
