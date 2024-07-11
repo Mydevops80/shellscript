@@ -89,7 +89,7 @@ APP_PREQ() {
 JAVA_SERVICE() {
 
   print copying service file
-  cp shipping.service /etc/systemd/system/shipping.service
+  cp ${component}.service /etc/systemd/system/${component}.service
   stat $?
 
   print  installing maven
@@ -98,14 +98,14 @@ JAVA_SERVICE() {
 
   APP_PREQ
   mvn clean package &>>$LOG_FILE
-  mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
+  mv target/${component}-1.0.jar ${component}.jar &>>$LOG_FILE
   stat $?
   SCHEMA_SETUP
 
-  print starting shipping
+  print starting ${component}
   systemctl daemon-reload &>>$LOG_FILE
-  systemctl enable shipping &>>$LOG_FILE
-  systemctl start shipping &>>$LOG_FILE
+  systemctl enable ${component} &>>$LOG_FILE
+  systemctl start ${component} &>>$LOG_FILE
   stat $?
 
 }
@@ -132,7 +132,9 @@ Nodejs(){
 
   print download nodejs dependencies
   stat $?
+  SCHEMA_SETUP
   SYSTEMD_SETUP
+
 
 }
 
