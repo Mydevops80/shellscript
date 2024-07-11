@@ -17,7 +17,7 @@ print starting Rabitmq
 systemctl start rabbitmq-server &>>$LOG_FILE
 stat $?
 
-print adding user to rabitmq
+print adding user to rabbitmq
 rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
 stat $?
