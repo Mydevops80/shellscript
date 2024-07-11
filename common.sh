@@ -1,6 +1,6 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
-code_dir={pwd}
+code_dir=pwd
 print(){
   echo &>>$LOG_FILE
 #  echo &>>$LOG_FILE
@@ -110,4 +110,5 @@ SYSTEMD_SETUP() {
   systemctl enable ${component} &>>$LOG_FILE
   systemctl restart ${component} &>>$LOG_FILE
   stat $?
+}
 }
