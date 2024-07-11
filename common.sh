@@ -1,5 +1,6 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
+code_dir={pwd}
 print(){
   echo &>>$LOG_FILE
 #  echo &>>$LOG_FILE
@@ -37,23 +38,44 @@ APP_PREQ() {
 
 }
 
-javaservice() {
+SYSTEMD_SETUP() {
+  cp ${code_dir/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
+  print  copying service file
+  stat $?
+
+  print enabling ${component}
+  systemctl daemon-reload &>>$LOG_FILE
+  systemctl enable ${component} &>>$LOG_FILE
+  systemctl restart ${component} &>>$LOG_FILE
+  stat $?
+}
+JAVA_SERVICE() {
+
+  print copying service file
   cp shipping.service /etc/systemd/system/shipping.service
-  dnf install maven -y
-  useradd roboshop
+  stat $?
+
+  print  installing maven
+  dnf install maven -y  &>>$LOG_FILE
+  stat $?
+
+  print  adding user
+  useradd roboshop  &>>$LOG_FILE
+  stat $?
+
   APP_PREQ
-  mvn clean package
-  mv target/shipping-1.0.jar shipping.jar
+  mvn clean package &>>$LOG_FILE
+  mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 
-  dnf install mysql -y
+  dnf install mysql -y &>>$LOG_FILE
 
-  mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/schema.sql
-  mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/master-data.sql
-  mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/app-user.sql
+  mysql -h localhost -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
+  mysql -h localhost -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
+  mysql -h localhost -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
 
-  systemctl daemon-reload
-  systemctl enable shipping
-  systemctl start shipping
+  systemctl daemon-reload &>>$LOG_FILE
+  systemctl enable shipping &>>$LOG_FILE
+  systemctl start shipping &>>$LOG_FILE
 }
 Nodejs(){
 
@@ -68,9 +90,6 @@ Nodejs(){
   dnf install nodejs -y &>>$LOG_FILE
 
 
-  cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
-  print  copying service file
-  stat $?
 
   print adding user roboshop
   id roboshop &>>$LOG_FILE
@@ -83,11 +102,8 @@ Nodejs(){
 
   print download nodejs dependencies
   stat $?
+  SYSTEMD_SETUP
 
-  print enabling ${component}
-  systemctl daemon-reload &>>$LOG_FILE
-  systemctl enable ${component} &>>$LOG_FILE
-  systemctl restart ${component} &>>$LOG_FILE
-  stat $?
+
 }
 
