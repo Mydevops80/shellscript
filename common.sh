@@ -1,6 +1,7 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
 code_dir=pwd
+
 print(){
   echo &>>$LOG_FILE
 #  echo &>>$LOG_FILE
@@ -48,7 +49,7 @@ JAVA_SERVICE() {
   stat $?
 
   print  adding user
-  if [ id-e -ne  0 ] ; then
+  if [ $? -ne  0 ] ; then
   useradd roboshop  &>>$LOG_FILE
   fi
   stat $?
@@ -86,8 +87,6 @@ Nodejs(){
   stat $?
 
   dnf install nodejs -y &>>$LOG_FILE
-
-
 
   print adding user roboshop
   id roboshop &>>$LOG_FILE
