@@ -19,6 +19,14 @@ stat() {
 }
 APP_PREQ() {
   #systemctl start nginx
+
+  print adding user roboshop
+  id roboshop &>>$LOG_FILE
+  if [ $? -ne 0 ] ; then
+    useradd roboshop &>>$LOG_FILE
+    fi
+  stat $?
+
   print removing content from html
   rm -rf ${app_path} &>>$LOG_FILE
   stat $?
@@ -46,13 +54,6 @@ JAVA_SERVICE() {
 
   print  installing maven
   dnf install maven -y  &>>$LOG_FILE
-  stat $?
-
-  print adding user roboshop
-  id roboshop &>>$LOG_FILE
-  if [ $? -ne 0 ] ; then
-    useradd roboshop &>>$LOG_FILE
-    fi
   stat $?
 
   APP_PREQ
