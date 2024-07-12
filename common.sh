@@ -99,26 +99,25 @@ JAVA() {
  SYSTEMD_SETUP
 
 }
-
 SCHEMA_SETUP() {
   if [ "$schema_setup" == "mongo" ]; then
-    PRINT  copy mongo repo file
-    cp mongo.repo /etc/yum.repos.d/mongo.repo   &>>$LOG_FILE
+    PRINT Copy MongoDB repo file
+    cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
     STAT $?
 
-    PRINT install mongodb client
-    dnf install mongodb-mongosh -y    &>>$LOG_FILE
+    PRINT Install MongoDB Client
+    dnf install mongodb-mongosh -y &>>$LOG_FILE
     STAT $?
 
-    mongosh --host mongod.heydevops.online </app/db/master-data.js
+    PRINT Load Master Data
+    mongosh --host mongodb.heydevops.online </app/db/master-data.js &>>$LOG_FILE
     STAT $?
   fi
 
   if [ "$schema_setup" == "mysql" ]; then
-
-      PRINT install MySQL client
-      dnf install mysql -y &>>$LOG_FILE
-      STAT $?
+    PRINT Install MySQL Client
+    dnf install mysql -y &>>$LOG_FILE
+    STAT $?
 
     for file in schema master-data app-user; do
       PRINT Load file - $file.sql
