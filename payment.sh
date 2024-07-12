@@ -11,3 +11,11 @@ STAT $?
 APP_PREREQ
 SYSTEMD_SETUP
 STAT $?
+
+PRINT installing python
+dnf install python3 gcc python3-devel -y
+STAT $?
+
+PRINT installing python requirements
+pip3 install -r requirements.txt
+STAT $?
