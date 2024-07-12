@@ -46,7 +46,6 @@ APP_PREREQ() {
 
 }
 SYSTEMD_SETUP() {
-
   PRINT  copying service file
   cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   STAT $?
