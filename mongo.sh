@@ -16,6 +16,5 @@ STAT $?
 PRINT starting mongod
 systemctl enable mongod &>>$LOG_FILE
 systemctl start mongod  &>>$LOG_FILE
-#update the config file
 systemctl restart mongod  &>>$LOG_FILE
 STAT $?
