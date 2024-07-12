@@ -102,7 +102,7 @@ JAVA() {
 SCHEMA_SETUP() {
   if [ "$schema_setup" == "mongo" ]; then
     PRINT Copy MongoDB repo file
-    cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+    cp ${code_dir}/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
     STAT $?
 
     PRINT Install MongoDB Client
