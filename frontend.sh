@@ -21,6 +21,7 @@ STAT $?
 
 APP_PREREQ
 
+
 PRINT enabiling nginx
 systemctl enable nginx &>>$LOG_FILE
 STAT $?
