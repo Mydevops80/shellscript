@@ -13,9 +13,9 @@ SYSTEMD_SETUP
 STAT $?
 
 PRINT installing python
-dnf install python3 gcc python3-devel -y
+dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
 STAT $?
 
 PRINT installing python requirements
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt   &>>$LOG_FILE
 STAT $?
