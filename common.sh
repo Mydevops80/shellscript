@@ -103,11 +103,11 @@ JAVA() {
 SCHEMA_SETUP() {
   if [ "$schema_setup" == "mongo" ]; then
     PRINT  copy mongodb repo file
-    cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+    cp mongo.repo /etc/yum.repos.d/mongo.repo   &>>$LOG_FILE
     STAT $?
 
     PRINT install mongodb client
-    dnf install mongodb-mongosh -y &>>$LOG_FILE
+    dnf install mongodb-mongosh -y    &>>$LOG_FILE
     STAT $?
 
     mongosh --host mongod.heydevops.online </app/db/master-data.js
