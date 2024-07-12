@@ -1,23 +1,23 @@
 source common.sh
 component=rabbitmq-server
 
-  print copying repo file
+  PRINT copying repo file
   cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
   STAT $?
 
-  print installing Rabitmq
+  PRINT installing Rabitmq
   dnf install ${component} -y &>>$LOG_FILE
   STAT $?
 
-  print enablling Rabitmq
+  PRINT enablling Rabitmq
   systemctl enable ${component} &>>$LOG_FILE
   STAT $?
 
-  print starting Rabitmq
+  PRINT starting Rabitmq
   systemctl start ${component} &>>$LOG_FILE
   STAT $?
 
-print adding user to rabbitmq
+PRINT adding user to rabbitmq
 rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
 STAT $?

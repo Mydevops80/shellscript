@@ -2,30 +2,30 @@ source common.sh
 component=frontend
 app_path=/usr/share/nginx/html
 
-print disable nodejs default version
+PRINT disable nodejs default version
 dnf module disable nginx -y &>>$LOG_FILE
 STAT $?
 
 
-print enabling nginx 1.24
+PRINT enabling nginx 1.24
 dnf module enable nginx:1.24 -y &>>$LOG_FILE
 STAT $?
 
-print installing nginx
+PRINT installing nginx
 dnf install nginx -y &>>$LOG_FILE
 STAT $?
 
-print creating a  nginx conf file
+PRINT creating a  nginx conf file
 cp nginx.conf /etc/nginx/nginx.conf
 STAT $?
 
 APP_PREQ
 
-print enabiling nginx
+PRINT enabiling nginx
 systemctl enable nginx &>>$LOG_FILE
 STAT $?
 
-print starting nginx
+PRINT starting nginx
 systemctl start nginx &>>$LOG_FILE
 systemctl restart nginx &>>$LOG_FILE
 STAT $?

@@ -1,7 +1,7 @@
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
 code_dir=$(pwd)
-print(){
+PRINT(){
   echo &>>$LOG_FILE
 #  echo &>>$LOG_FILE
   "#####################################$*###############################################" &>>$LOG_FILE
@@ -20,27 +20,27 @@ STAT() {
 APP_PREQ() {
   #systemctl start nginx
 
-  print adding user roboshop
+  PRINT adding user roboshop
   id roboshop &>>$LOG_FILE
   if [ $? -ne 0 ] ; then
     useradd roboshop &>>$LOG_FILE
   fi
   STAT $?
 
-  print removing  application content
+  PRINT removing  application content
   rm -rf ${app_path} &>>$LOG_FILE
   STAT $?
 
-  print creating app directory
+  PRINT creating app directory
   mkdir ${app_path} &>>$LOG_FILE
   STAT $?
 
-  print downloading application content
+  PRINT downloading application content
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
   cd ${app_path} &>>$LOG_FILE
   STAT $?
 
-  print extracting application content
+  PRINT extracting application content
   cd ${app_path}
   unzip /tmp/${component}.zip &>>$LOG_FILE
   STAT $?
@@ -48,11 +48,11 @@ APP_PREQ() {
 }
 SYSTEMD_SETUP() {
 
-  print  copying service file
+  PRINT  copying service file
   cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service  &>>$LOG_FILE
   STAT $?
 
-  print enabling ${component}
+  PRINT enabling ${component}
   systemctl daemon-reload &>>$LOG_FILE
   systemctl enable ${component} &>>$LOG_FILE
   systemctl restart ${component} &>>$LOG_FILE
@@ -63,13 +63,13 @@ NODEJS() {
   dnf module disable nodejs -y &>>$LOG_FILE
   STAT $?
 
-  print  installing nodejs 20
+  PRINT  installing nodejs 20
   dnf module enable nodejs:20 -y &>>$LOG_FILE
   STAT $?
 
   dnf install nodejs -y &>>$LOG_FILE
 
-  print adding user roboshop
+  PRINT adding user roboshop
   id roboshop &>>$LOG_FILE
   if [ $? -ne 0 ] ; then
     useradd roboshop &>>$LOG_FILE
@@ -78,7 +78,7 @@ NODEJS() {
 
   APP_PREQ
 
-  print download nodejs dependencies
+  PRINT download nodejs dependencies
   npm install &>>$LOG_FILE
   STAT $?
 
@@ -90,11 +90,11 @@ NODEJS() {
 
 JAVA_SERVICE() {
 
-  print copying service file
+  PRINT copying service file
   cp ${component}.service /etc/systemd/system/${component}.service
   STAT $?
 
-  print  installing maven
+  PRINT  installing maven
   dnf install maven -y  &>>$LOG_FILE
   STAT $?
 
@@ -103,11 +103,11 @@ JAVA_SERVICE() {
   mv target/${component}-1.0.jar ${component}.jar &>>$LOG_FILE
   STAT $?
 
-  print schemasetup
+  PRINT schemasetup
   SCHEMA_SETUP
   STAT $?
 
-  print starting ${component}
+  PRINT starting ${component}
   systemctl daemon-reload &>>$LOG_FILE
   systemctl enable ${component} &>>$LOG_FILE
   systemctl start ${component} &>>$LOG_FILE
@@ -118,11 +118,11 @@ JAVA_SERVICE() {
 SCHEMA_SETUP(){
   if [ "$schema_setup" == "mongo" ]; then
 
-    print  copy mongodb repo file
+    PRINT  copy mongodb repo file
     cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
     STAT $?
 
-    print install mongodb client
+    PRINT install mongodb client
     dnf install mongodb-mongosh -y &>>$LOG_FILE
     STAT $?
 
@@ -132,26 +132,26 @@ SCHEMA_SETUP(){
 
   if [ "$schema_setup" == "mysql" ]; then
 
-      print install MySQL client
+      PRINT install MySQL client
       dnf install mysql -y &>>$LOG_FILE
       STAT $?
 
       mongosh --host mongod.heydevops.online </app/db/master-data.js
       STAT $?
 
-      print installing mysql
+      PRINT installing mysql
       dnf install mysql -y &>>$LOG_FILE
       STAT $?
 
-      print loadschema
+      PRINT loadschema
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
       STAT $?
 
-      print load master data
+      PRINT load master data
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
       STAT $?
 
-      print load user data
+      PRINT load user data
       mysql -h mysql.heydevops.online -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
       STAT $?
 
