@@ -2,7 +2,7 @@ LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
 code_dir=$(pwd)
 
-PRINT(){
+PRINT() {
   echo &>>$LOG_FILE
   echo &>>$LOG_FILE
   echo " ####################################### $* ########################################" &>>$LOG_FILE
@@ -11,10 +11,11 @@ PRINT(){
 
 STAT() {
   if [ $1 -eq 0 ]; then
-    echo -e "\e[32m Success \e[0m"
+    echo -e "\e[32mSuccess\e[0m"
   else
-      echo -e "\e[31m Failure \e[0m"
-      echo  " refer the log file for more information : /tmp/roboshop.log"
+      echo -e "\e[31mFailure\e[0m"
+      echo
+      echo  " refer the log file for more information : ${LOG_FILE}"
       exit $1
   fi
 }
@@ -32,7 +33,7 @@ APP_PREREQ() {
   STAT $?
 
   PRINT creating app directory
-  mkdir ${app_path} &>>$LOG_FILE
+  mkdir ${app_path}  &>>$LOG_FILE
   STAT $?
 
   PRINT downloading application content
@@ -41,7 +42,7 @@ APP_PREREQ() {
 
   PRINT extracting application content
   cd ${app_path}
-  unzip /tmp/${component}.zip &>>$LOG_FILE
+  unzip /tmp/${component}.zip  &>>$LOG_FILE
   STAT $?
 
 }
@@ -90,8 +91,9 @@ JAVA() {
 
   APP_PREREQ
   mvn clean package &>>$LOG_FILE
-  mv target/${component}-1.0.jar ${component}.jar &>>$LOG_FILE
   STAT $?
+
+  mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 
  SCHEMA_SETUP
  SYSTEMD_SETUP
