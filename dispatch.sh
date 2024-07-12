@@ -2,7 +2,7 @@ source common.sh
 component=dispatch
 app_path=/app
 
-APP_PREQ
+APP_PREREQ
 PRINT installing golang
 dnf install golang -y &>>$LOG_FILE
 STAT $?
