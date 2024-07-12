@@ -19,7 +19,7 @@ PRINT creating a  nginx conf file
 cp nginx.conf /etc/nginx/nginx.conf
 STAT $?
 
-APP_PREQ
+APP_PREREQ
 
 PRINT enabiling nginx
 systemctl enable nginx &>>$LOG_FILE
