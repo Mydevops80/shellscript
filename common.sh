@@ -126,5 +126,4 @@ SCHEMA_SETUP() {
     done
 
   fi
-
 }
